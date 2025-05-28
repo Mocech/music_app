@@ -31,7 +31,7 @@ class Music(models.Model):
     album_name = models.CharField(max_length=100,blank=True)
     music_description = models.TextField(blank=False)
     tags = models.CharField(max_length=255,blank=False)
-    music_file = models.FileField(blank=False,upload_to='media/music', default='music.mp3')
+    music_file = models.FileField(blank=False,upload_to='music', default='music.mp3')
     up_loaded_at = models.DateTimeField(auto_now_add=True)
     duration = models.DurationField(null=True, blank=True)
     quality = models.CharField(max_length=50, null=True, blank=True)
