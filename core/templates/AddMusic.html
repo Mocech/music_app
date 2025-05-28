@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_CSS %}
+
+ <link rel="stylesheet" href="{% static 'css/Addnew.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+
+    <main class="upload-main">
+        <div class="container">
+            <div class="upload-header">
+                <h1>Upload Your Music</h1>
+                <p>Share your creativity with the world</p>
+            </div>
+
+            <div class="upload-container">
+                <form class="upload-form" id="upload-form" method="post" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    
+                    <div class="upload-section">
+                        <h3>Music File</h3>
+                        <div class="file-upload-area" id="file-upload-area">
+                            <div class="file-upload-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h4>Drag & drop your music file here</h4>
+                                <p>or <span class="upload-link">browse files</span></p>
+                                <p class="file-info">Supports MP3, WAV, FLAC (Max 50MB)</p>
+                            </div>
+                           {{form.music_file}}
+                        </div>
+                        <div class="file-preview" id="file-preview" style="display: none;">
+                            <div class="file-item">
+                                <i class="fas fa-music"></i>
+                                <div class="file-details">
+                                    <span class="file-name"></span>
+                                    <span class="file-size"></span>
+                                </div>
+                                <button type="button" class="remove-file" onclick="removeFile()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="{{form.title.id_for_label}}">Music Title *</label>
+                            {{form.music_title}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{form.artist.id_for_label}}">Artist *</label>
+                            {{form.artist_name}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{form.genre.id_for_label}}">Genre *</label>
+                               {{form.genre}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{form.album.id_for_label}}">Album</label>
+                            {{form.album_name}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.description.id_for_label}}">Description</label>
+                       {{form.music_description}}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.tags.id_for_label}}">Tags</label>
+                        {{form.tags}}
+                    </div>
+
+                   
+                    <!-- Professional Lyrics Section -->
+                    <div class="form-group lyrics-section">
+                        <label for="lyrics">
+                            <i class="fas fa-microphone"></i>
+                            Lyrics (Optional)
+                        </label>
+                        <div class="lyrics-container">
+                            {{form.lyrics}}
+                            <div class="lyrics-footer">
+                                <span class="lyrics-count">0 characters</span>
+                                <span class="lyrics-tip">
+                                    <i class="fas fa-info-circle"></i>
+                                    Use empty lines to separate verses and sections
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                     
+                        <button type="submit" class="btn btn-primary">Upload Music</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+
+    {% block extra_JS %}
+       <script src="{% static 'js/upload.js' %}"></script>
+    {% endblock %}
+{% endblock %}

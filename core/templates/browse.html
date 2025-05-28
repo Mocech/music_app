@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_CSS %}
+
+ <link rel="stylesheet" href="{% static 'css/browse.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+
+    <main class="browse-main">
+        <div class="container">
+            <div class="browse-header">
+                <h1>Discover Music</h1>
+                <p>Explore thousands of tracks from artists worldwide</p>
+            </div>
+
+            <div class="search-filters">
+             <form method="get" action="{% url 'core:browse' %}" class="search-filters" style="gap: 0.5rem;">
+            <div class="search-bar" style="flex: 1; min-width: 300px;">
+                <i class="fas fa-search"></i>
+                <input
+                type="text"
+                id="search-input"
+                name="search"
+                placeholder="Search by title or artist..."
+                value="{{ search_term|default:'' }}"
+                autocomplete="off"
+                />
+            </div>
+            <button type="submit" class="nav-link btn-signup">Search</button>
+            </form>
+
+
+                <div class="filters">
+                
+                        <select id="genre-filter" onchange="location = this.value;">
+                            <option value="{% url 'core:browse' %}" {% if not selected_genre %}selected{% endif %}>All Genres</option>
+                            {% for value, label in genre_choices %}
+                                <option value="{% url 'core:browse' %}?genre={{ value }}" {% if selected_genre == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+
+
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" onclick="switchView('grid')" title="Grid View">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" onclick="switchView('list')" title="List View">
+                        <i class="fas fa-list"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="music-container grid-view" id="music-container">
+                {% for form in form %}
+                <div class="music-card" data-genre="electronic" data-title="midnight dreams" data-artist="alex rivera">
+                    <div class="music-cover">
+                        <i class="fas fa-music"></i>
+                        <button class="play-btn" onclick="togglePlay(this)">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                    <div class="music-info">
+                        <h3>{{form.music_title}}</h3>
+                        <p class="artist">{{form.artist_name}}</p>
+                        <p class="genre">{{form.genre}}</p>
+                        <div class="music-stats">
+                            <span><i class="fas fa-play"></i> 1.2K</span>
+                            <span><i class="fas fa-heart"></i> 89</span>
+                        </div>
+                    </div>
+
+                    <audio src="{{form.music_file}}" preload="none"></audio>
+                    <div class="load-more">
+                <a href="{% url 'core:song' form.pk %}"><button class="btn btn-secondary">View more</button></a>
+            </div>
+                </div>
+            
+               
+             {% endfor %}
+            
+
+            <div class="load-more">
+                <button class="btn btn-secondary" onclick="loadMoreMusic()">Load More</button>
+            </div>
+        </div>
+    </main>
+
+{% block extra_JS %}
+
+<script src="{% static 'js/browse.js' %}" ></script>
+
+{% endblock %}
+
+{% endblock %}

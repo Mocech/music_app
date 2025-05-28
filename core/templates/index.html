@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_CSS %}
+
+ <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<main>
+        <section class="hero">
+            <div class="hero-content">
+                <div>
+                    <h1>Share Your Sound. Discover New Music.</h1>
+                    <p>Connect with artists worldwide and explore unlimited music possibilities</p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'core:create' %}" class="btn btn-primary">Start Uploading</a>
+                        <a href="{% url 'core:browse' %}" class="btn btn-secondary">Browse Music</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="music-wave">
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="wave-bar"></div>
+                        <div class="beat-indicator"></div>
+                        <div class="frequency-spectrum">
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                            <div class="freq-bar"></div>
+                        </div>
+                    </div>
+                    <div class="vinyl-record"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <div class="container">
+                <h2>Featured Uploads</h2>
+                
+                <div class="music-grid">
+                      {% for featured in featured_songs %}
+                    <div class="music-card">
+                        <div class="music-cover">
+                            <i class="fas fa-music"></i>
+                            <button class="play-btn" onclick="togglePlay(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                      
+                        <div class="music-info">
+                            <h3>{{featured.music_title}}</h3>
+                            <p class="artist">{{featured.artist_name}}</p>
+                            <p class="genre">{{featured.genre}}</p>
+                        </div>
+                        <audio src="#" preload="none"></audio>
+                    </div>
+                    {% endfor %}
+                </div>
+                    
+            </div>
+        </section>
+    </main>
+
+
+{% endblock %}

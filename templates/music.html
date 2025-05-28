@@ -1,0 +1,437 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_CSS %}
+
+ <link rel="stylesheet" href="{% static 'css/single_song.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+    <main class="music-main">
+        <!-- Hero Section with Music Player -->
+        <section class="music-hero">
+            <div class="container">
+                <div class="music-header">
+                    <div class="music-artwork">
+                        <div class="artwork-container">
+                            <div class="artwork-image">
+                                <i class="fas fa-music"></i>
+                                <div class="play-overlay">
+                                    <button class="main-play-btn" onclick="toggleMainPlay()">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="vinyl-effect"></div>
+                        </div>
+                        <div class="waveform-container">
+                            <div class="waveform" id="waveform">
+                                <div class="wave-bar" style="height: 20%"></div>
+                                <div class="wave-bar" style="height: 45%"></div>
+                                <div class="wave-bar" style="height: 80%"></div>
+                                <div class="wave-bar" style="height: 30%"></div>
+                                <div class="wave-bar" style="height: 90%"></div>
+                                <div class="wave-bar" style="height: 60%"></div>
+                                <div class="wave-bar" style="height: 75%"></div>
+                                <div class="wave-bar" style="height: 40%"></div>
+                                <div class="wave-bar" style="height: 85%"></div>
+                                <div class="wave-bar" style="height: 55%"></div>
+                                <div class="wave-bar" style="height: 70%"></div>
+                                <div class="wave-bar" style="height: 35%"></div>
+                                <div class="wave-bar" style="height: 95%"></div>
+                                <div class="wave-bar" style="height: 25%"></div>
+                                <div class="wave-bar" style="height: 65%"></div>
+                                <div class="wave-bar" style="height: 50%"></div>
+                                <div class="wave-bar" style="height: 80%"></div>
+                                <div class="wave-bar" style="height: 45%"></div>
+                                <div class="wave-bar" style="height: 70%"></div>
+                                <div class="wave-bar" style="height: 30%"></div>
+                            </div>
+                            <div class="progress-indicator" id="progress-indicator"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="music-info">
+                        <div class="music-meta">
+                            <h1 class="music-title">{{form.music_title}}</h1>
+                            <div class="artist-info">
+                                <img src="/placeholder.svg?height=40&width=40" alt="Alex Rivera" class="artist-avatar">
+                                <div>
+                                    <a href="#" class="artist-name">Alex Rivera</a>
+                                    <div class="artist-stats">
+                                        <span><i class="fas fa-users"></i> 12.5K followers</span>
+                                        <span><i class="fas fa-music"></i> 45 tracks</span>
+                                    </div>
+                                </div>
+                                <button class="follow-btn">
+                                    <i class="fas fa-plus"></i> Follow
+                                </button>
+                            </div>
+                            <div class="music-details">
+                                <span class="genre"><i class="fas fa-tag"></i> Electronic</span>
+                                <span class="duration"><i class="fas fa-clock"></i> 4:32</span>
+                                <span class="release-date"><i class="fas fa-calendar"></i> Dec 15, 2024</span>
+                                <span class="bpm"><i class="fas fa-heartbeat"></i> 128 BPM</span>
+                            </div>
+                        </div>
+
+                        <div class="music-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-play"></i>
+                                <div>
+                                    <span class="stat-number">2.4K</span>
+                                    <span class="stat-label">Plays</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-heart"></i>
+                                <div>
+                                    <span class="stat-number">189</span>
+                                    <span class="stat-label">Likes</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-download"></i>
+                                <div>
+                                    <span class="stat-number">67</span>
+                                    <span class="stat-label">Downloads</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-share"></i>
+                                <div>
+                                    <span class="stat-number">23</span>
+                                    <span class="stat-label">Shares</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="music-actions">
+                            <button class="action-btn primary" onclick="likeTrack()">
+                                <i class="fas fa-heart"></i> Like
+                            </button>
+                            <button class="action-btn secondary" onclick="addToPlaylist()">
+                                <i class="fas fa-plus"></i> Add to Playlist
+                            </button>
+                            <button class="action-btn secondary" onclick="shareTrack()">
+                                <i class="fas fa-share"></i> Share
+                            </button>
+                            <button class="action-btn download" onclick="downloadTrack()">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+
+        <!-- Content Sections -->
+        <section class="music-content">
+            <div class="container">
+                <div class="content-grid">
+                    <!-- Main Content -->
+                    <div class="main-content">
+                        <!-- Description -->
+                        <div class="content-section">
+                            <h3>About this track</h3>
+                            <div class="description">
+                                <p>A mesmerizing journey through electronic soundscapes, "Midnight Dreams" combines ethereal synths with driving beats to create an immersive sonic experience. This track was inspired by late-night city walks and the mysterious energy that emerges when the world sleeps.</p>
+                                <p>Featuring custom-designed synthesizer patches and field recordings from various urban environments, this piece represents a fusion of organic and digital elements that define modern electronic music.</p>
+                            </div>
+                        </div>
+
+                        <!-- Lyrics -->
+                        <div class="content-section">
+                            <h3>Lyrics</h3>
+                            <div class="lyrics-container">
+                                <div class="lyrics-scroll">
+                                    <div class="lyrics-line" data-time="0">In the silence of the midnight hour</div>
+                                    <div class="lyrics-line" data-time="15">Dreams begin to take their power</div>
+                                    <div class="lyrics-line" data-time="30">Neon lights paint the empty streets</div>
+                                    <div class="lyrics-line" data-time="45">Where reality and fantasy meets</div>
+                                    <div class="lyrics-line" data-time="60">Close your eyes and feel the beat</div>
+                                    <div class="lyrics-line" data-time="75">Let the rhythm move your feet</div>
+                                    <div class="lyrics-line" data-time="90">In this world of midnight dreams</div>
+                                    <div class="lyrics-line" data-time="105">Nothing's quite the way it seems</div>
+                                    <div class="lyrics-line" data-time="120">Synthesizers paint the sky</div>
+                                    <div class="lyrics-line" data-time="135">As the city sleeps, we fly</div>
+                                    <div class="lyrics-line" data-time="150">Through dimensions yet unknown</div>
+                                    <div class="lyrics-line" data-time="165">In this electronic zone</div>
+                                </div>
+                                <div class="lyrics-controls">
+                                    <button class="lyrics-btn" onclick="toggleLyricsSync()">
+                                        <i class="fas fa-sync"></i> Sync with audio
+                                    </button>
+                                    <button class="lyrics-btn" onclick="toggleLyricsSize()">
+                                        <i class="fas fa-text-height"></i> Text size
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comments -->
+                        <div class="content-section">
+                            <h3>Comments <span class="comment-count">(24)</span></h3>
+                            <div class="comment-form">
+                                <img src="/placeholder.svg?height=40&width=40" alt="Your avatar" class="comment-avatar">
+                                <div class="comment-input-container">
+                                    <textarea placeholder="Add a comment..." class="comment-input" id="comment-input"></textarea>
+                                    <div class="comment-actions">
+                                        <button class="comment-btn" onclick="postComment()">
+                                            <i class="fas fa-paper-plane"></i> Post
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="comments-list">
+                                <div class="comment-item">
+                                    <img src="/placeholder.svg?height=40&width=40" alt="User" class="comment-avatar">
+                                    <div class="comment-content">
+                                        <div class="comment-header">
+                                            <span class="comment-author">MusicLover92</span>
+                                            <span class="comment-time">2 hours ago</span>
+                                        </div>
+                                        <p class="comment-text">This track is absolutely incredible! The production quality is top-notch and the atmosphere is just perfect. Can't stop listening to it! 🔥</p>
+                                        <div class="comment-actions">
+                                            <button class="comment-action-btn">
+                                                <i class="fas fa-heart"></i> 12
+                                            </button>
+                                            <button class="comment-action-btn">
+                                                <i class="fas fa-reply"></i> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comment-item">
+                                    <img src="/placeholder.svg?height=40&width=40" alt="User" class="comment-avatar">
+                                    <div class="comment-content">
+                                        <div class="comment-header">
+                                            <span class="comment-author">BeatMaster</span>
+                                            <span class="comment-time">5 hours ago</span>
+                                        </div>
+                                        <p class="comment-text">The synth work around 2:30 is pure magic! How did you achieve that ethereal pad sound?</p>
+                                        <div class="comment-actions">
+                                            <button class="comment-action-btn">
+                                                <i class="fas fa-heart"></i> 8
+                                            </button>
+                                            <button class="comment-action-btn">
+                                                <i class="fas fa-reply"></i> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="comment-item">
+                                    <img src="/placeholder.svg?height=40&width=40" alt="User" class="comment-avatar">
+                                    <div class="comment-content">
+                                        <div class="comment-header">
+                                            <span class="comment-author">ElectroFan</span>
+                                            <span class="comment-time">1 day ago</span>
+                                        </div>
+                                        <p class="comment-text">Perfect for late night coding sessions! Added to my focus playlist immediately.</p>
+                                        <div class="comment-actions">
+                                            <button class="comment-action-btn">
+                                                <i class="fas fa-heart"></i> 15
+                                            </button>
+                                            <button class="comment-action-btn">
+                                                <i class="fas fa-reply"></i> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="load-more-comments">
+                                <i class="fas fa-chevron-down"></i> Load more comments
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="sidebar">
+                        <!-- Related Tracks -->
+                        <div class="sidebar-section">
+                            <h4>More from Alex Rivera</h4>
+                            <div class="related-tracks">
+                                <div class="related-track">
+                                    <div class="track-cover">
+                                        <i class="fas fa-music"></i>
+                                        <button class="mini-play-btn">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="track-info">
+                                        <h5>Electric Pulse</h5>
+                                        <p>Alex Rivera</p>
+                                        <span class="track-stats">1.8K plays</span>
+                                    </div>
+                                </div>
+
+                                <div class="related-track">
+                                    <div class="track-cover">
+                                        <i class="fas fa-music"></i>
+                                        <button class="mini-play-btn">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="track-info">
+                                        <h5>Neon Nights</h5>
+                                        <p>Alex Rivera</p>
+                                        <span class="track-stats">2.1K plays</span>
+                                    </div>
+                                </div>
+
+                                <div class="related-track">
+                                    <div class="track-cover">
+                                        <i class="fas fa-music"></i>
+                                        <button class="mini-play-btn">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                    </div>
+                                    <div class="track-info">
+                                        <h5>Digital Horizon</h5>
+                                        <p>Alex Rivera</p>
+                                        <span class="track-stats">1.5K plays</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Track Info -->
+                        <div class="sidebar-section">
+                            <h4>Track Information</h4>
+                            <div class="track-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">Genre:</span>
+                                    <span class="detail-value">Electronic, Ambient</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Key:</span>
+                                    <span class="detail-value">A minor</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">BPM:</span>
+                                    <span class="detail-value">128</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Duration:</span>
+                                    <span class="detail-value">4:32</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">File Size:</span>
+                                    <span class="detail-value">8.2 MB</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Quality:</span>
+                                    <span class="detail-value">320 kbps MP3</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">License:</span>
+                                    <span class="detail-value">Creative Commons</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tags -->
+                        <div class="sidebar-section">
+                            <h4>Tags</h4>
+                            <div class="tags-container">
+                                <span class="tag">electronic</span>
+                                <span class="tag">ambient</span>
+                                <span class="tag">synthesizer</span>
+                                <span class="tag">atmospheric</span>
+                                <span class="tag">chill</span>
+                                <span class="tag">dreamy</span>
+                                <span class="tag">midnight</span>
+                                <span class="tag">urban</span>
+                            </div>
+                        </div>
+
+                        <!-- Share Options -->
+                        <div class="sidebar-section">
+                            <h4>Share this track</h4>
+                            <div class="share-options">
+                                <button class="share-btn facebook" onclick="shareOn('facebook')">
+                                    <i class="fab fa-facebook"></i> Facebook
+                                </button>
+                                <button class="share-btn twitter" onclick="shareOn('twitter')">
+                                    <i class="fab fa-twitter"></i> Twitter
+                                </button>
+                                <button class="share-btn whatsapp" onclick="shareOn('whatsapp')">
+                                    <i class="fab fa-whatsapp"></i> WhatsApp
+                                </button>
+                                <button class="share-btn copy" onclick="copyLink()">
+                                    <i class="fas fa-link"></i> Copy Link
+                                </button>
+                                <button class="share-btn embed" onclick="getEmbedCode()">
+                                    <i class="fas fa-code"></i> Embed
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Download Modal -->
+    <div class="modal" id="download-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Download Track</h3>
+                <button class="modal-close" onclick="closeModal('download-modal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="download-options">
+                    <div class="download-option">
+                        <div class="option-info">
+                            <h4>High Quality MP3</h4>
+                            <p>320 kbps • 8.2 MB</p>
+                        </div>
+                        <button class="download-btn" onclick="startDownload('mp3-320')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="download-option">
+                        <div class="option-info">
+                            <h4>Standard MP3</h4>
+                            <p>128 kbps • 3.8 MB</p>
+                        </div>
+                        <button class="download-btn" onclick="startDownload('mp3-128')">
+                            <i class="fas fa-download"></i> Download
+                        </button>
+                    </div>
+                    <div class="download-option premium">
+                        <div class="option-info">
+                            <h4>Lossless FLAC</h4>
+                            <p>1411 kbps • 28.5 MB</p>
+                            <span class="premium-badge">Premium</span>
+                        </div>
+                        <button class="download-btn premium" onclick="upgradeToPremium()">
+                            <i class="fas fa-crown"></i> Upgrade
+                        </button>
+                    </div>
+                </div>
+                <div class="download-note">
+                    <i class="fas fa-info-circle"></i>
+                    <p>By downloading this track, you agree to our <a href="#terms">Terms of Use</a> and the artist's licensing terms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% block extra_JS %}
+
+<link rel="stylesheet" href="{% static 'js/browse.js' %}">
+
+{% endblock %}
+
+{% endblock %}

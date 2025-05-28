@@ -1,0 +1,28 @@
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-music"></i>
+                <span>SoundShare</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="{% url 'core:home' %}" class="nav-link active">Home</a>
+                <a href="{% url 'core:create' %}" class="nav-link">Add Song</a>
+                <a href="{% url 'core:browse' %}" class="nav-link">Browse</a>
+                
+                {% if user.is_authenticated %}
+                <a href="{% url 'accounts:profile' %}" class="nav-link btn-signup">Profile</a>
+                <a href="{% url 'accounts:logout' %}" class="nav-link btn-signup">Logout</a>
+
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="nav-link">Login</a>
+                <a href="{% url 'accounts:register' %}" class="nav-link btn-signup">Sign Up</a>
+
+                {% endif %}
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>

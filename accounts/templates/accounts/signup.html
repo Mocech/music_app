@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_CSS %}
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %} 
+
+
+{% block content %}
+  
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Join SoundShare</h1>
+                    <p>Create your account and start sharing music</p>
+                </div>
+
+                <form class="auth-form" id="signup-form" action="{% url 'accounts:register' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="{{form.fullname.id_for_label}}">Full Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            {{form.name}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.email.id_for_label}}">Email</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                           {{form.email}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.password.id_for_label}}">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                           {{form.password1}}
+                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{form.confirmPassword.id_for_label}}">Confirm Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            {{form.password2}}
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#terms"> Terms of Service</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full">Sign Up</button>
+                </form>
+
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+
+                <button class="google-btn" onclick="handleGoogleSignup()">
+                    <svg width="18" height="18" viewBox="0 0 18 18">
+                        <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+                        <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2.04a4.8 4.8 0 0 1-7.18-2.53H1.83v2.07A8 8 0 0 0 8.98 17z"/>
+                        <path fill="#FBBC05" d="M4.5 10.49a4.8 4.8 0 0 1 0-3.07V5.35H1.83a8 8 0 0 0 0 7.28l2.67-2.14z"/>
+                        <path fill="#EA4335" d="M8.98 4.72c1.16 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.35L4.5 7.42a4.77 4.77 0 0 1 4.48-2.7z"/>
+                    </svg>
+                    Sign up with Google
+                </button>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="{% url 'accounts:login' %}">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+                    
+    
+
+
+{% endblock %}    

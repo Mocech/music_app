@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_CSS %}
+
+ <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<main class="profile-main">
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <div class="avatar-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <button class="avatar-edit">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <div class="profile-info">
+                    <h1>Alex Rivera</h1>
+                    <p class="profile-email">alex.rivera@email.com</p>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Uploads</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">1.2K</span>
+                            <span class="stat-label">Plays</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">89</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-secondary">Edit Profile</button>
+                    <a href="upload.html" class="btn btn-primary">Upload New</a>
+                </div>
+            </div>
+
+            <div class="profile-content">
+                <div class="section-header">
+                    <h2>My Uploads</h2>
+                    <div class="view-toggle">
+                        <button class="toggle-btn active" onclick="toggleView('grid')">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="toggle-btn" onclick="toggleView('list')">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="uploads-container" id="uploads-container">
+                    <div class="upload-item">
+                        <div class="upload-cover">
+                            <i class="fas fa-music"></i>
+                            <button class="play-btn" onclick="togglePlay(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Midnight Dreams</h3>
+                            <p class="upload-date">Uploaded 2 days ago</p>
+                            <div class="upload-stats">
+                                <span><i class="fas fa-play"></i> 234 plays</span>
+                                <span><i class="fas fa-download"></i> 45 downloads</span>
+                            </div>
+                        </div>
+                        <div class="upload-actions">
+                            <button class="action-btn" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn" title="Share">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="action-btn delete" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <audio src="#" preload="none"></audio>
+                    </div>
+
+                    <div class="upload-item">
+                        <div class="upload-cover">
+                            <i class="fas fa-music"></i>
+                            <button class="play-btn" onclick="togglePlay(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Electric Pulse</h3>
+                            <p class="upload-date">Uploaded 1 week ago</p>
+                            <div class="upload-stats">
+                                <span><i class="fas fa-play"></i> 567 plays</span>
+                                <span><i class="fas fa-download"></i> 89 downloads</span>
+                            </div>
+                        </div>
+                        <div class="upload-actions">
+                            <button class="action-btn" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn" title="Share">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="action-btn delete" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <audio src="#" preload="none"></audio>
+                    </div>
+
+                    <div class="upload-item">
+                        <div class="upload-cover">
+                            <i class="fas fa-music"></i>
+                            <button class="play-btn" onclick="togglePlay(this)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="upload-info">
+                            <h3>Sunset Vibes</h3>
+                            <p class="upload-date">Uploaded 2 weeks ago</p>
+                            <div class="upload-stats">
+                                <span><i class="fas fa-play"></i> 123 plays</span>
+                                <span><i class="fas fa-download"></i> 23 downloads</span>
+                            </div>
+                        </div>
+                        <div class="upload-actions">
+                            <button class="action-btn" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn" title="Share">
+                                <i class="fas fa-share"></i>
+                            </button>
+                            <button class="action-btn delete" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <audio src="#" preload="none"></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+{% endblock %}

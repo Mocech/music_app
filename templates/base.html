@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon --> 
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    
+  
+    
+    
+    <link rel="stylesheet" href="{% static 'css/message.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    
+    {% block extra_CSS %} {% endblock %}
+</head>
+<body>
+    {% include 'nav.html' %}
+
+        {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %} {% endblock %}
+
+
+     {% include 'footer.html' %}
+
+   
+
+    {% block extra_JS %} {% endblock %}
+    
+    <script src="{% static 'js/main.js' %}"></script>
+
+        <script>
+    // Auto-dismiss alerts after 5 seconds
+    setTimeout(function () {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+        alert.style.transition = 'opacity 0.5s ease';
+        alert.style.opacity = '0';
+        setTimeout(() => alert.remove(), 500); // fully remove after fade-out
+        });
+    }, 5000); // 5000ms = 5 seconds
+    </script>
+
+
+</body>
+</html>
