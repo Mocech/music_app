@@ -14,7 +14,8 @@ SECRET_KEY = 'django-insecure-f@=+agl8%hxxqlqs$7)i&zn1h=0k&5gg7qzvxkacm8f43w7zwd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['music_app.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['soundshare.onrender.com', 'localhost', '127.0.0.1']
+
 
 
 
